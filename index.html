@@ -11,14 +11,12 @@
     <title>Hello, world!</title>
 
     <style>
-      .innerContent{
-        background-color: grey;
-        height:400px;
-        }
+      .navbar{ padding: 0 1rem; }
+      #main{ margin-top: 5rem; }
     </style>
   </head>
   <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-success">
+    <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-success">
         <div class="container">
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -55,19 +53,68 @@
         </div>
       </div>
     </nav>
-    <div class="container">
+    <div class="container" id="main">
       <h1>What do you MEME?!</h1>
+      <div class="alert alert-success alert-dismissable" role="alert">
+        <b>NEW</b> feature added.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
       <p>MRW I'm trying to center divs with CSS.</p>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus placerat lacus urna, eget dignissim eros dictum in. Vestibulum id turpis in nisl facilisis hendrerit sit amet sed felis. Morbi vulputate ligula leo, non euismod lectus euismod bibendum. Fusce sodales tristique semper. Quisque at magna at massa porttitor ullamcorper. Integer mattis libero non felis tincidunt, sit amet eleifend nulla suscipit. Maecenas tincidunt massa vitae dui porta, ut sagittis sem sagittis.</p>
       <div class="row">
         <div class="col-md col-sm-6">
-          <div class="innerContent">Col 1</div>
+          <div class="card" style="width: 18rem;">
+            <div class="card-header">
+                <button type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <img class="card-img-top" src="breaddog.bmp" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
         </div>
-        <div class="col-md col-sm-6"><div class="innerContent">Col 2</div></div>
-        <div class="col-md col-sm-6"><div class="innerContent">Col 3</div></div>
+        </div>
         <div class="col-md col-sm-6">
           <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="mark_ice.jpg" alt="Card image cap">
+            <div class="card-header">
+                <button type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          <img class="card-img-top" src="breaddog.bmp" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+      </div></div>
+        <div class="col-md col-sm-6">
+          <div class="card" style="width: 18rem;">
+              <div class="card-header">
+                  <button type="button" class="close" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+          <img class="card-img-top" src="breaddog.bmp" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+      </div></div>
+        <div class="col-md col-sm-6">
+          <div class="card" style="width: 18rem;">
+              <div class="card-header">
+                  <button type="button" class="close" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <img class="card-img-top" src="breaddog.bmp" alt="Card image cap">
               <div class="card-body">
                 <h5 class="card-title">Card title</h5>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -80,8 +127,22 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+      $(function(){
+        var elements = $(".card .close, .alert .close");
+        elements.click(function(evt){
+          console.log(evt);
+          $(this).closest(".card, .alert").slideUp();
+          $.get("https://bittrex.com/api/{version}/{method}?param=value")
+          .done(function(){
+            console.log($(this).data());
+          });
+        });
+      });
+    </script>
   </body>
 </html>
