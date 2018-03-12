@@ -7,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MessagesComponent implements OnInit {
 
-  constructor() { }
+  //defaults to public property
+  messages:string[];
+
+  constructor() {
+    this.messages = ['NEW messages feature added.'];
+  }
 
   ngOnInit() {
   }
