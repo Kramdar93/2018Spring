@@ -1,3 +1,43 @@
-<p>
-  game works!
-</p>
+<div class="row">
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        MyQuotes
+      </div>
+      <div class="card-body">
+        <ul>
+          <li *ngFor="let quote of model.myQuotes">{{quote}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        PlayedQuotes
+      </div>
+      <div class="card-body">
+        <ul>
+          <li *ngFor="let quote of model.playedQuotes">{{quote.text}}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!--picture-->
+    <div class="card"> 
+      <img class="card-img" [src]="model.picture" alt="Card image cap" />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        otherPlayers
+      </div>
+      <div class="card-body">
+        <ul>
+          <li *ngFor="let user of model.players">{{user.name}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
