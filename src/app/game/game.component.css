@@ -1,0 +1,8 @@
+li.quote{
+    cursor: pointer;
+    color:blue;
+}
+li.quote:hover{
+    background-color: grey;
+    color:green;
+}

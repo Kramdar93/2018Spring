@@ -5,8 +5,12 @@
         MyQuotes
       </div>
       <div class="card-body">
-        <ul>
-          <li *ngFor="let quote of model.myQuotes">{{quote}}</li>
+        <ul class="list-group">
+          <li *ngFor="let quote of model.myQuotes" 
+              class="list-group-item quote" 
+              (click)="SubmitQuote($event, quote)"> <!-- $event: click event causing this -->
+            {{quote}}
+          </li>
         </ul>
       </div>
     </div>
@@ -17,8 +21,11 @@
         PlayedQuotes
       </div>
       <div class="card-body">
-        <ul>
-          <li *ngFor="let quote of model.playedQuotes">{{quote.text}}</li>
+        <ul class="list-group">
+          <li *ngFor="let quote of model.playedQuotes" class="list-group-item">
+            {{quote.text}}
+            <span class="badge badge-secondary float-right">{{quote.playerName}}</span>
+          </li>
         </ul>
       </div>
     </div>
@@ -34,8 +41,8 @@
         otherPlayers
       </div>
       <div class="card-body">
-        <ul>
-          <li *ngFor="let user of model.players">{{user.name}}</li>
+        <ul class="list-group">
+          <li *ngFor="let user of model.players" class="list-group-item">{{user.name}}</li>
         </ul>
       </div>
     </div>
