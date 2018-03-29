@@ -5,10 +5,11 @@
         MyQuotes
       </div>
       <div class="card-body">
-        <ul class="list-group">
+        <ul class="list-group my-quotes">
           <li *ngFor="let quote of model.myQuotes" 
-              class="list-group-item quote" 
-              (click)="SubmitQuote($event, quote)"> <!-- $event: click event causing this -->
+              (click)="SubmitQuote($event, quote)"
+              [ngClass]="{ enabled:!MyPlayedQuote() }"
+              class="list-group-item" > <!-- $event: click event causing this -->
             {{quote}}
           </li>
         </ul>
@@ -22,9 +23,17 @@
       </div>
       <div class="card-body">
         <ul class="list-group">
-          <li *ngFor="let quote of model.playedQuotes" class="list-group-item">
+          <li *ngFor="let quote of model.playedQuotes" 
+              [ngClass] = "{ 'list-group-item-success':quote.chosen }"
+              class="list-group-item">
             {{quote.text}}
-            <span class="badge badge-secondary float-right">{{quote.playerName}}</span>
+            <span *ngIf="!IsEveryoneDone() || (!IsDealer() && !ChosenQuote())" class="badge badge-secondary float-right">hidden</span>
+            <span *ngIf="ChosenQuote()" class="badge badge-primary float-right">{{quote.playerName}}</span>
+            <button *ngIf="IsEveryoneDone() && IsDealer() && !ChosenQuote()" 
+                    (click)="quote.chosen = true"
+                    class="btn btn-sm float-right">
+                    Choose
+                  </button>
           </li>
         </ul>
       </div>

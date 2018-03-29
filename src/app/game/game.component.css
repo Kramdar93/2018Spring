@@ -1,8 +1,10 @@
-li.quote{
-    cursor: pointer;
-    color:blue;
+.my-quotes{
+    cursor:not-allowed;
 }
-li.quote:hover{
-    background-color: grey;
+.my-quotes .enabled{
+    cursor: pointer;
+}
+.my-quotes .enabled:hover{
+    background-color: darkgrey;
     color:green;
 }
