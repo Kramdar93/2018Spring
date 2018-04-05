@@ -1,7 +1,11 @@
 const express = require('express');
+const Game = require('./model');
+
 var app = express.Router();
 
-var model = require('./model');
+var game = new Game();
 
 module.exports = app
-    .get('/quotes', (req,res) => res.send(model.GetQuotes()))
+    .get('/quotes', (req,res) => res.send(game.GetQuotes()) )
+    .get('/state', (req,res) => res.send(game) )
+    .post('/picture',(req,res) => res.send(game.FlipPicture()) )

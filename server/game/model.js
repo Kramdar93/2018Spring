@@ -1,4 +1,7 @@
+const axios = require("axios");
 
+var iCurrentQuote = 0;
+var iCurrentPicture = 0;
 
 const QuoteStack = [
     "Wisdom is the reward you get for a lifetime of listening when you'd have preferred to talk. -Doug Larson",
@@ -100,27 +103,32 @@ const QuoteStack = [
   "Dreaming, after all, is a form of planning. -Gloria Steinem",
   "You can’t use up creativity.  The more you use, the more you have. -Maya Angelou",
   "If you look at what you have in life, you’ll always have more. If you look at what you don’t have in life, you’ll never have enough. -Oprah Winfrey",
-"Stay committed to your decesions and stay flexible in your approach. It's the end you're after. -Anthony Robbins"
+  "Stay committed to your decesions and stay flexible in your approach. It's the end you're after. -Anthony Robbins"
 ];
 
-const PictureStack = [
-    "[url]"
+var PictureStack = [
+    "https://media.npr.org/assets/img/2018/04/05/ap_18095049489956_wide-84012e77b124cbf137fafa58b53928f5b69204af-s800-c85.jpg",
+    "https://news.mb.com.ph/wp-content/uploads/2018/04/020318_BORACAY_24_DANCEL.jpg"
 ];
 
-/*
-class Game {
-    players;
-    dealerID;
+axios.get('https://api.imgflip.com/get_memes')
+    .then( response => PictureStack = response.data.data.memes )
 
-    playedQuotes;
-    picture;
+function Game() {
+    this.players = [];
+    this.dealerID = null;
 
-    GetQuotes = () => QuoteStack.slice(iCurrentQuote, iCurrentQuote += 7);
-}*/
+    this.playedQuotes = [];
+    this.picture = null;
 
-var GetQuotes = () => QuoteStack.slice(iCurrentQuote, iCurrentQuote += 7);
+    this.GetQuotes = () => QuoteStack.slice(iCurrentQuote, iCurrentQuote += 7);
 
-var iCurrentQuote = 0;
-var iCurrentPicture = 0;
+    this.FlipPicture = () => this.picture = PictureStack[iCurrentPicture = (iCurrentPicture + 1) % PictureStack.length];
+    this.SubmitQuote = (text,playerID) => this.playedQuotes.push( {text:text, playerID:playerID} );
+    this.ChooseQuote = text => {
+        this.playedQuotes.find(x => x.text == text).chosen = true;
+        this.dealerID = this.Players[this.dealerID = (this.dealerID + 1) % this.players.length];
+    };
+}
 
-module.exports.GetQuotes = GetQuotes;
+module.exports = Game;
