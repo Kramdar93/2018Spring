@@ -8,9 +8,16 @@ const simple = require('./simpleController');
 const game = require('./game/controller');
 
 app
+    .use("/",(req,res,next)=>{
+        //middleware to allow passing more data
+        res.header("Access-Control-Allow-Origin","*");
+        res.header("Access-Control-Allow-Methods","*");
+        res.header("Access-Control-Allow-Headers","*");
+        next();
+    })
     .use("/simple",simple)
     .use("/game",game)
-    .listen(port);
+    .listen(port)
 
 console.log("web server running on http://" + serverName + ":" + port +"/simple");
 console.log("game server running on http://" + serverName + ":" + port +"/game");

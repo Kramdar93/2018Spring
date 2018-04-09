@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Http } from "@angular/http";
 import { Game, Quote, User } from '../models/game';
 
 @Component({
@@ -12,7 +13,20 @@ export class GameComponent implements OnInit {
 
   currentUser = new User();
 
-  constructor() { }
+  private api = "http://localhost:8080/game";
+
+  constructor(private http:Http) {
+    this.currentUser.name = "mark";
+    http.get(this.api + "/quotes")
+      .subscribe((data)=>this.currentUser.myQuotes=data.json());
+    setInterval( ()=>this.Refresh(), 1000 );
+  }
+
+  //ToDo: use socket.io
+  Refresh(){
+    this.http.get(this.api + "/state")
+      .subscribe((data)=>this.model=data.json());
+  }
 
   ngOnInit() {
   }
@@ -27,9 +41,9 @@ export class GameComponent implements OnInit {
 
     this.model.playedQuotes.push(new Quote(text, this.currentUser.name)); //this line could be used in model.
 
-    var index = this.model.myQuotes.indexOf(text); //get index of selected quote in myquotes array
+    var index = this.currentUser.myQuotes.indexOf(text); //get index of selected quote in myquotes array
     if(index >= 0){ //if we got something
-      this.model.myQuotes.splice(index, 1); //remove it
+      this.currentUser.myQuotes.splice(index, 1); //remove it
     }
   }
 

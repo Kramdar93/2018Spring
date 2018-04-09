@@ -6,7 +6,7 @@
       </div>
       <div class="card-body">
         <ul class="list-group my-quotes">
-          <li *ngFor="let quote of model.myQuotes" 
+          <li *ngFor="let quote of currentUser.myQuotes" 
               (click)="SubmitQuote($event, quote)"
               [ngClass]="{ enabled:!MyPlayedQuote() }"
               class="list-group-item" > <!-- $event: click event causing this -->
@@ -41,7 +41,7 @@
 
     <!--picture-->
     <div class="card"> 
-      <img class="card-img" [src]="model.picture" alt="Card image cap" />
+      <img class="card-img" [src]="model.picture.url" [alt]="model.picture.name" />
     </div>
   </div>
   <div class="col-md-4">
