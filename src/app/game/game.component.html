@@ -42,6 +42,14 @@
     <!--picture-->
     <div class="card"> 
       <img class="card-img" [src]="model.picture.url" [alt]="model.picture.name" />
+      <div class="card-img-overlay" style="text-align:center">
+        <button 
+          
+          (click)="FlipPicture($event)"
+          class="btn btn-success btn-lg" >
+          Flip Picture
+        </button>
+      </div>
     </div>
   </div>
   <div class="col-md-4">

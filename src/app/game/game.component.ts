@@ -22,13 +22,18 @@ export class GameComponent implements OnInit {
     setInterval( ()=>this.Refresh(), 1000 );
   }
 
+  ngOnInit() {
+  }
+
   //ToDo: use socket.io
   Refresh(){
     this.http.get(this.api + "/state")
       .subscribe((data)=>this.model=data.json());
   }
 
-  ngOnInit() {
+  FlipPicture(e:MouseEvent){
+    this.http.post(this.api + "/picture",{})
+      .subscribe(); //subscribe required in order for message to be sent.
   }
 
   //include event so we can get more information if needed.
