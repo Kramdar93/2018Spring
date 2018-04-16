@@ -121,7 +121,15 @@ function Game() {
     this.playedQuotes = [];
     this.picture = null;
 
-    this.GetQuotes = () => QuoteStack.slice(iCurrentQuote, iCurrentQuote += 7);
+    this.GetQuotes = (playerID) => {
+        if(this.players.some(x=>x.PlayerID==playerID)){
+            return QuoteStack.slice(iCurrentQuote, iCurrentQuote += 1);
+        }
+        else{
+            this.players.push({PlayerID:playerID,PlayerName:playerID});
+            return QuoteStack.slice(iCurrentQuote, iCurrentQuote += 7);
+        }
+    }
 
     this.FlipPicture = () => this.picture = PictureStack[iCurrentPicture = (iCurrentPicture + 1) % PictureStack.length];
     this.SubmitQuote = (text,playerID) => this.playedQuotes.push( {text:text, playerID:playerID} );

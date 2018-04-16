@@ -1,20 +1,16 @@
 
 
 export class Game {
+    //this class is always replaced by server instance, so initialize to empty stuff.
     players:User[] = [];
     playedQuotes:Quote[] = [];
-    dealer:string = "mark";
+    dealerID:string = "";
     picture:{url:string,name:string} = {url:"",name:""};
-
-    constructor(){
-        this.players = [{name:'mark',myQuotes:[]}, {name:'alice',myQuotes:[]}, {name:'bob',myQuotes:[]}];
-        //this.playedQuotes = [new Quote("tfw you ate the whole pringles can"), new Quote("too many airheads"), new Quote("but seriously y tho")];
-        this.playedQuotes = [{chosen:false,text:'tfw you ate the whole pringles can',playerName:'alice'}]
-    }
 }
 
 export class User{
-    name:string = "";
+    ID:string = "";
+    name="";
     myQuotes:string[] = [];
 
     constructor(){
@@ -25,10 +21,10 @@ export class User{
 export class Quote{
     chosen:boolean = false;
     text:string;
-    playerName:string;
+    playerID:string;
 
     constructor(newText:string, player:string){
         this.text = newText;
-        this.playerName = player;
+        this.playerID = player;
     }
 }

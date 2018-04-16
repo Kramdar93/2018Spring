@@ -16,9 +16,11 @@ export class GameComponent implements OnInit {
   private api = "http://localhost:8080/game";
 
   constructor(private http:Http) {
-    this.currentUser.name = "mark";
-    http.get(this.api + "/quotes")
+    this.currentUser.ID = "mark";
+    http.get(this.api + "/quotes",{ params:{PlayerID:this.currentUser.ID} })
       .subscribe((data)=>this.currentUser.myQuotes=data.json());
+    http.get(this.api + "/state")
+      .subscribe((data)=>this.model=data.json());
     setInterval( ()=>this.Refresh(), 1000 );
   }
 
@@ -45,7 +47,7 @@ export class GameComponent implements OnInit {
     if (this.MyPlayedQuote()) return; //only do something if we have not played a quote. truthy if one has been found.
 
     //this.model.playedQuotes.push(new Quote(text, this.currentUser.name)); //this line could be used in model.
-    this.http.post(this.api + "/quotes",{Text:text, PlayerID:this.currentUser.name})
+    this.http.post(this.api + "/quotes",{Text:text, PlayerID:this.currentUser.ID})
       .subscribe((data)=>{
         if(data.json().success){
           var index = this.currentUser.myQuotes.indexOf(text); //get index of selected quote in myquotes array
@@ -55,13 +57,18 @@ export class GameComponent implements OnInit {
         }
       });
     
+    //get a new quote
+    this.http.get(this.api + "/quotes",{params:{PlayerID:this.currentUser.ID} })
+      .subscribe((data)=>{
+        this.currentUser.myQuotes.push(data.json()[0]);
+      });
   }
 
   //skip overly verbose function definition using fat arrow notation
-  MyPlayedQuote = () => this.model.playedQuotes.find(x => x.playerName == this.currentUser.name);
+  MyPlayedQuote = () => this.model.playedQuotes.find(x => x.playerID == this.currentUser.ID);
   //no params-----'  '------function def    *note: return value infered from playedQuotes.find
 
-  IsDealer = () => this.model.dealer == this.currentUser.name;
+  IsDealer = () => this.model.dealerID == this.currentUser.ID;
 
   //these really belongs in the model
   ChosenQuote = () => this.model.playedQuotes.find(x => x.chosen);
