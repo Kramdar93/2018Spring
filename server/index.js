@@ -1,14 +1,19 @@
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
+
+const simple = require('./simpleController');
+const game = require('./game/controller');
+
 const app = express();
 
 const serverName = "localhost";
 const port = 8080;
 
-const simple = require('./simpleController');
-const game = require('./game/controller');
 
 app
+    .use(bodyParser.json())
+    .use(bodyParser.urlencoded({extended:false}))
     .use("/", (req,res,next)=>{
         //middleware to allow passing more data
         res.header("Access-Control-Allow-Origin","*");

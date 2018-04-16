@@ -44,12 +44,17 @@ export class GameComponent implements OnInit {
 
     if (this.MyPlayedQuote()) return; //only do something if we have not played a quote. truthy if one has been found.
 
-    this.model.playedQuotes.push(new Quote(text, this.currentUser.name)); //this line could be used in model.
-
-    var index = this.currentUser.myQuotes.indexOf(text); //get index of selected quote in myquotes array
-    if(index >= 0){ //if we got something
-      this.currentUser.myQuotes.splice(index, 1); //remove it
-    }
+    //this.model.playedQuotes.push(new Quote(text, this.currentUser.name)); //this line could be used in model.
+    this.http.post(this.api + "/quotes",{Text:text, PlayerID:this.currentUser.name})
+      .subscribe((data)=>{
+        if(data.json().success){
+          var index = this.currentUser.myQuotes.indexOf(text); //get index of selected quote in myquotes array
+          if(index >= 0){ //if we got something
+            this.currentUser.myQuotes.splice(index, 1); //remove it
+          }
+        }
+      });
+    
   }
 
   //skip overly verbose function definition using fat arrow notation

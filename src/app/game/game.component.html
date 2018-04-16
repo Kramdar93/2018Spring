@@ -41,7 +41,11 @@
 
     <!--picture-->
     <div class="card"> 
-      <img class="card-img" [src]="model.picture.url" [alt]="model.picture.name" />
+      <img 
+        class="card-img"
+        *ngIf="model.picture" 
+        [src]="model.picture.url" 
+        [alt]="model.picture.name" />
       <div class="card-img-overlay" style="text-align:center">
         <button 
           
