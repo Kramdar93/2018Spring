@@ -129,16 +129,27 @@ function Game() {
             if(this.Players.some(x=> x.PlayerId == playerId)){
                 return {id:playerId, quotes:QuotesStack.slice(iCurrentQuote, iCurrentQuote += 1)};   
             }
-            else{
-                //need to push new player
+            //on login, playerid is the name. TODO: add new param for better readability.
+            //if there is a player there already, do not duplicate, just return new hand.
+            else if(this.Players.some(x=> x.PlayerName == playerId)){
+                return {id:playerId, quotes:QuotesStack.slice(iCurrentQuote, iCurrentQuote += 7)};
+            }
+            //otherwise make new player
+            else if(playerId){
+                if(this.Players.length == 0){
+                    //only flip pic if we're the first.
+                    this.FlipPicture();
+                }
+                //need to push new player either way
                 this.Players.push({ PlayerId: this.nextID, Name: playerId });
+                //still return a hand
                 return {id:this.nextID++, quotes:QuotesStack.slice(iCurrentQuote, iCurrentQuote += 7)};
             }
         }
         
         this.FlipPicture = () => this.Picture = PicturesStack[iCurrentPicture = (iCurrentPicture+1) % PicturesStack.length ];
 
-        this.SubmitQuote = (text, playerId) => this.PlayedQuotes.push({ Text: text, PlayerName: Players[playerId].Name });
+        this.SubmitQuote = (text, playerId) => this.PlayedQuotes.push({ Text: text, PlayerName: this.Players[playerId].Name });
         this.ChooseQuote = text => {
             this.PlayedQuotes.find(x=> x.Text == text).Chosen = true;
             this.DealerId = (this.DealerId + 1) % this.Players.length;

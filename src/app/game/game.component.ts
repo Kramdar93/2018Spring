@@ -55,14 +55,12 @@ export class GameComponent implements OnInit {
   login(name: string){
     this.http.get(this._api + "/quotes", { params : { PlayerId: name } })
       .subscribe(data=> {
-        console.log(data.json());
-        console.log(this.Me);
         this.Me = { Name: name, ID:data.json().id, MyQuotes: data.json().quotes };
       })
   }
 
   MyPlayedQuote = () => this.Model.PlayedQuotes.find( x => x.PlayerId == this.Me.Name );
   ChosenQuote = () => this.Model.PlayedQuotes.find( x => x.Chosen );
-  IsEveryoneDone = () => this.Model.PlayedQuotes.length == this.Model.Players.length - 1;
-  IAmTheDealer = () => this.Me.Name == this.Model.DealerId;
+  IsEveryoneDone = () => this.Model.PlayedQuotes.length >= this.Model.Players.length - 1;
+  IAmTheDealer = () => this.Me.ID == this.Model.DealerId;
 }
