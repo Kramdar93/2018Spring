@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .my-quotes{
     cursor:not-allowed;
 }
@@ -7,4 +8,14 @@
 .my-quotes .enabled:hover{
     background-color: darkgrey;
     color:green;
+=======
+.my-quotes {
+    cursor: not-allowed;
+}
+.my-quotes .enabled {
+    cursor: pointer;
+}
+.my-quotes .enabled:hover {
+    background-color: #DDEEFF;
+>>>>>>> f7a0871b1f7cbb7c50e1efe3b46af46056f2e200
 }

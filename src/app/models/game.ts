@@ -1,5 +1,6 @@
 
 
+<<<<<<< HEAD
 export class Game {
     //this class is always replaced by server instance, so initialize to empty stuff.
     players:User[] = [];
@@ -27,4 +28,26 @@ export class Quote{
         this.text = newText;
         this.playerID = player;
     }
+=======
+
+export class Game {
+
+    Players: User[] = [];
+    DealerId: string;
+    Picture: {
+        url: string
+    };
+    PlayedQuotes: Quote[] = [];
+}
+
+export class User {
+    Name: string;
+    MyQuotes: string[];
+}
+
+export class Quote {
+    Text: string;
+    PlayerId: string;
+    Chosen: boolean = false;
+>>>>>>> f7a0871b1f7cbb7c50e1efe3b46af46056f2e200
 }
