@@ -1,76 +1,3 @@
-<<<<<<< HEAD
-<div class="row">
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-header">
-        MyQuotes
-      </div>
-      <div class="card-body">
-        <ul class="list-group my-quotes">
-          <li *ngFor="let quote of currentUser.myQuotes" 
-              (click)="SubmitQuote($event, quote)"
-              [ngClass]="{ enabled:!MyPlayedQuote() }"
-              class="list-group-item" > <!-- $event: click event causing this -->
-            {{quote}}
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-8">
-    <div class="card">
-      <div class="card-header">
-        PlayedQuotes
-      </div>
-      <div class="card-body">
-        <ul class="list-group">
-          <li *ngFor="let quote of model.playedQuotes" 
-              [ngClass] = "{ 'list-group-item-success':quote.chosen }"
-              class="list-group-item">
-            {{quote.text}}
-            <span *ngIf="!IsEveryoneDone() || (!IsDealer() && !ChosenQuote())" class="badge badge-secondary float-right">hidden</span>
-            <span *ngIf="ChosenQuote()" class="badge badge-primary float-right">{{quote.playerName}}</span>
-            <button *ngIf="IsEveryoneDone() && IsDealer() && !ChosenQuote()" 
-                    (click)="quote.chosen = true"
-                    class="btn btn-sm float-right">
-                    Choose
-                  </button>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <!--picture-->
-    <div class="card"> 
-      <img 
-        class="card-img"
-        *ngIf="model.picture" 
-        [src]="model.picture.url" 
-        [alt]="model.picture.name" />
-      <div class="card-img-overlay" style="text-align:center">
-        <button 
-          
-          (click)="FlipPicture($event)"
-          class="btn btn-success btn-lg" >
-          Flip Picture
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-header">
-        otherPlayers
-      </div>
-      <div class="card-body">
-        <ul class="list-group">
-          <li *ngFor="let user of model.players" class="list-group-item">{{user.PlayerName}}</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-=======
 <div class="row" *ngIf="!Me">
     <input #Name /><button (click)="login(Name.value)" >Login</button>
 </div>
@@ -82,13 +9,13 @@
             <ul class="list-group list-group-flush my-quotes">
                 <li *ngFor="let quote of Me.MyQuotes" 
                     (click)="submitQuote($event, quote)"
-                    [ngClass]="{ enabled: !MyPlayedQuote() }"
+                    [ngClass]="{ enabled: !MyPlayedQuote() && !IAmTheDealer() }"
                     class="list-group-item" >
                     {{quote}}
                 </li>
             </ul>
           </div>
-    </div>
+        </div>
     <div class="col-md-8">
         <div class="card bg-success mb-3" >
             <div class="card-header text-white">Played Quotes</div>
@@ -98,9 +25,9 @@
                         class="list-group-item d-flex justify-content-between align-items-center ">
                         {{quote.Text}}
                         <span *ngIf="!IsEveryoneDone() || (!IAmTheDealer() && !ChosenQuote())" class="badge badge-light">hidden</span>
-                        <span *ngIf="ChosenQuote()" class="badge badge-primary">{{quote.PlayerId}}</span>
+                        <span *ngIf="ChosenQuote()" class="badge badge-primary">{{quote.PlayerName}}</span>
                         <button *ngIf="IsEveryoneDone() && IAmTheDealer() && !ChosenQuote()"
-                                (click)="quote.Chosen = true"
+                                (click)="chooseQuote($event, quote)"
                                 class="btn btn-sm btn-primary">
                                 Choose
                         </button>
@@ -111,7 +38,12 @@
             <div class="card">
                 <img class="card-img" *ngIf="Model.Picture" [src]="Model.Picture.url" />
                 <div class="card-img-overlay" style="text-align: center">
-                    <button class="btn btn-success btn-lg" (click)="flipPicture($event)">Flip the Picture</button>
+                    <button 
+                      *ngIf="IAmTheDealer() && ChosenQuote()"
+                      class="btn btn-success btn-lg" 
+                      (click)="flipPicture($event)">
+                        Flip the Picture
+                    </button>
                 </div>
             </div>
     </div>
@@ -128,4 +60,3 @@
         </div>
     </div>
 </div>
->>>>>>> f7a0871b1f7cbb7c50e1efe3b46af46056f2e200
