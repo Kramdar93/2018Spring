@@ -59,7 +59,7 @@ export class GameComponent implements OnInit {
       })
   }
 
-  MyPlayedQuote = () => this.Model.PlayedQuotes.find( x => x.PlayerId == this.Me.Name );
+  MyPlayedQuote = () => this.Model.PlayedQuotes.find( x => x.PlayerId == this.Me.ID );
   ChosenQuote = () => this.Model.PlayedQuotes.find( x => x.Chosen );
   IsEveryoneDone = () => this.Model.PlayedQuotes.length >= this.Model.Players.length - 1;
   IAmTheDealer = () => this.Me.ID == this.Model.DealerId;

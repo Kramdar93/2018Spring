@@ -52,9 +52,10 @@
         <div class="card" >
             <div class="card-header">Other Players</div>
             <ul class="list-group list-group-flush">
-                <li *ngFor="let player of Model.Players" class="list-group-item">
+                <li *ngFor="let player of Model.Players" class="list-group-item justify-content-between">
                     <img style="height: 16px; width: 16px" class="rounded">
                     {{player.Name}}
+                    <span class="badge badge-primary">{{player.Score}}</span>
                 </li>
             </ul>
         </div>

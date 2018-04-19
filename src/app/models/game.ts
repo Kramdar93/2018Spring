@@ -19,6 +19,6 @@ export class User {
 
 export class Quote {
     Text: string;
-    PlayerId: string;
+    PlayerId: number;
     Chosen: boolean = false;
 }

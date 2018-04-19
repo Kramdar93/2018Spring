@@ -131,7 +131,7 @@ function Game() {
             }
             //on login, playerid is the name. TODO: add new param for better readability.
             //if there is a player there already, do not duplicate, just return new hand.
-            else if(this.Players.some(x=> x.PlayerName == playerId)){
+            else if(this.Players.some(x=> x.Name == playerId)){
                 return {id:playerId, quotes:QuotesStack.slice(iCurrentQuote, iCurrentQuote += 7)};
             }
             //otherwise make new player
@@ -141,17 +141,24 @@ function Game() {
                     this.FlipPicture();
                 }
                 //need to push new player either way
-                this.Players.push({ PlayerId: this.nextID, Name: playerId });
+                this.Players.push({ PlayerId: this.nextID, Name: playerId, Score:0 });
                 //still return a hand
                 return {id:this.nextID++, quotes:QuotesStack.slice(iCurrentQuote, iCurrentQuote += 7)};
             }
         }
         
-        this.FlipPicture = () => this.Picture = PicturesStack[iCurrentPicture = (iCurrentPicture+1) % PicturesStack.length ];
+        this.FlipPicture = () => {
+            this.Picture = PicturesStack[iCurrentPicture = (iCurrentPicture+1) % PicturesStack.length ];
+            this.PlayedQuotes = [];
+        }
 
-        this.SubmitQuote = (text, playerId) => this.PlayedQuotes.push({ Text: text, PlayerName: this.Players[playerId].Name });
+        this.SubmitQuote = (text, playerId) => this.PlayedQuotes.push({ Text: text, 
+            PlayerID: playerId, 
+            PlayerName: this.Players.find(x=> x.PlayerId == playerId).Name });
         this.ChooseQuote = text => {
-            this.PlayedQuotes.find(x=> x.Text == text).Chosen = true;
+            var quote = this.PlayedQuotes.find(x=> x.Text == text);
+            quote.Chosen = true;
+            this.Players.find(x=> x.PlayerId == quote.PlayerId).Score += 1;
             this.DealerId = (this.DealerId + 1) % this.Players.length;
         } 
 }
