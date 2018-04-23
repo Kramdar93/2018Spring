@@ -118,32 +118,32 @@ var iCurrentPicture = 0;
 
 function Game() {
         this.Players = [];
-        this.DealerId = 0; //dealer will always initially be the first player added .: index 0
+        this.DealerID = 0; //dealer will always initially be the first player added .: index 0
 
         this.PlayedQuotes = [];
         this.Picture = null;
 
         this.nextID = 0;
 
-        this.GetQuotes = (playerId) => {
-            if(this.Players.some(x=> x.PlayerId == playerId)){
-                return {id:playerId, quotes:QuotesStack.slice(iCurrentQuote, iCurrentQuote += 1)};   
+        this.GetQuotes = (playerID) => {
+            if(this.Players.some(x=> x.PlayerID == playerID)){
+                return {ID:playerID, quotes:QuotesStack.slice(iCurrentQuote, iCurrentQuote += 1)};   
             }
-            //on login, playerid is the name. TODO: add new param for better readability.
+            //on login, playerID is the name. TODO: add new param for better readability.
             //if there is a player there already, do not duplicate, just return new hand.
-            else if(this.Players.some(x=> x.Name == playerId)){
-                return {id:playerId, quotes:QuotesStack.slice(iCurrentQuote, iCurrentQuote += 7)};
+            else if(this.Players.some(x=> x.Name == playerID)){
+                return {ID:playerID, quotes:QuotesStack.slice(iCurrentQuote, iCurrentQuote += 7)};
             }
             //otherwise make new player
-            else if(playerId){
+            else if(playerID){
                 if(this.Players.length == 0){
                     //only flip pic if we're the first.
                     this.FlipPicture();
                 }
                 //need to push new player either way
-                this.Players.push({ PlayerId: this.nextID, Name: playerId, Score:0 });
+                this.Players.push({ PlayerID: this.nextID, Name: playerID, Score:0 });
                 //still return a hand
-                return {id:this.nextID++, quotes:QuotesStack.slice(iCurrentQuote, iCurrentQuote += 7)};
+                return {ID:this.nextID++, quotes:QuotesStack.slice(iCurrentQuote, iCurrentQuote += 7)};
             }
         }
         
@@ -152,14 +152,14 @@ function Game() {
             this.PlayedQuotes = [];
         }
 
-        this.SubmitQuote = (text, playerId) => this.PlayedQuotes.push({ Text: text, 
-            PlayerID: playerId, 
-            PlayerName: this.Players.find(x=> x.PlayerId == playerId).Name });
+        this.SubmitQuote = (text, playerID) => this.PlayedQuotes.push({ Text: text, 
+            PlayerID: playerID, 
+            PlayerName: this.Players.find(x=> x.PlayerID == playerID).Name });
         this.ChooseQuote = text => {
             var quote = this.PlayedQuotes.find(x=> x.Text == text);
             quote.Chosen = true;
-            this.Players.find(x=> x.PlayerId == quote.PlayerId).Score += 1;
-            this.DealerId = (this.DealerId + 1) % this.Players.length;
+            this.Players.find(x=> x.PlayerID == quote.PlayerID).Score += 1;
+            this.DealerID = (this.DealerID + 1) % this.Players.length;
         } 
 }
 

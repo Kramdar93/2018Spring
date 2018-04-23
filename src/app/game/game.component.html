@@ -55,7 +55,8 @@
                 <li *ngFor="let player of Model.Players" class="list-group-item justify-content-between">
                     <img style="height: 16px; width: 16px" class="rounded">
                     {{player.Name}}
-                    <span class="badge badge-primary">{{player.Score}}</span>
+                    <span [ngClass]="player.PlayerID==Model.DealerID ? 'badge-warning' : 'badge-primary'"
+                        class="badge">{{player.Score}}</span>
                 </li>
             </ul>
         </div>
