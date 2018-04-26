@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from "@angular/http";
+
 import { Game, Quote, User } from '../models/game';
+
+import { MessagesService } from '../services/messages.service';
 
 @Component({
   selector: 'app-game',
@@ -13,7 +16,7 @@ export class GameComponent implements OnInit {
     Me: User;
     private _api = "http://localhost:8080/game";
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private messageServer:MessagesService) {
     setInterval(()=> this.refresh(), 1000)
   }
 
@@ -26,6 +29,7 @@ export class GameComponent implements OnInit {
   }
 
   flipPicture(e: MouseEvent){
+    this.messageServer.Messages.push({text:"Picture Flipped!",type:"success"});
     this.http.post(this._api + "/picture",{})
         .subscribe();
   }
@@ -35,6 +39,8 @@ export class GameComponent implements OnInit {
 
     if( this.MyPlayedQuote() || this.IAmTheDealer() ) return;
 
+    this.messageServer.Messages.push({text:"Subitted quote:" + text,type:"success"});
+    
     this.http.post(this._api + "/quotes", { Text: text, PlayerID: this.Me.ID })
       .subscribe(data=> {
           if(data.json().success){
@@ -57,6 +63,7 @@ export class GameComponent implements OnInit {
     this.http.get(this._api + "/quotes", { params : { PlayerID: name } })
       .subscribe(data=> {
         this.Me = { Name: name, ID:data.json().ID, MyQuotes: data.json().quotes };
+        this.messageServer.Messages.push({text:"Welcome " + name + "!",type:"success"});
       })
   }
 

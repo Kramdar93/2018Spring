@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { MessagesService } from '../services/messages.service';
+
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
@@ -7,12 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MessagesComponent implements OnInit {
 
-    Messages: string[];
-  constructor() {
-      this.Messages = ['You can now choose your own pictures.'];
+  
+  constructor( public messageServer:MessagesService ) {
   }
 
   ngOnInit() {
+  }
+
+
+  delete(i:number){
+    this.messageServer.Messages.splice(i,1);
   }
 
 }

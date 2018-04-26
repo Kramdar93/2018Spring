@@ -115,7 +115,7 @@ axios.get('https://api.imgflip.com/get_memes')
 
 var iCurrentPicture = 0;
 
-
+//TODO:add serverside error/logic checking.
 function Game() {
         this.Players = [];
         this.DealerID = 0; //dealer will always initially be the first player added .: index 0
