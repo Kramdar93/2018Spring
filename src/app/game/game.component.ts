@@ -4,6 +4,8 @@ import { Http } from "@angular/http";
 import { Game, Quote, User } from '../models/game';
 
 import { MessagesService } from '../services/messages.service';
+import { GameService } from '../services/game.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-game',
@@ -13,10 +15,17 @@ import { MessagesService } from '../services/messages.service';
 export class GameComponent implements OnInit {
 
     Model = new Game();
-    Me: User;
+    Me:User;
+
     private _api = "http://localhost:8080/game";
 
-  constructor(private http: Http, private messageServer:MessagesService) {
+  constructor(private http: Http, 
+              private messageServer:MessagesService, 
+              private gameServer:GameService, 
+              private router:Router) {
+    this.Me = gameServer.Me;
+    if(!this.Me) router.navigate(["/login"]);
+    this.join(this.Me.Name);
     setInterval(()=> this.refresh(), 1000)
   }
 
@@ -59,12 +68,12 @@ export class GameComponent implements OnInit {
       .subscribe(); //can just sub, state will update automatically.
   }
 
-  login(name: string){
+  join(name: string){
     this.http.get(this._api + "/quotes", { params : { PlayerID: name } })
-      .subscribe(data=> {
-        this.Me = { Name: name, ID:data.json().ID, MyQuotes: data.json().quotes };
-        this.messageServer.Messages.push({text:"Welcome " + name + "!",type:"success"});
-      })
+    .subscribe(data=> {
+      this.Me.MyQuotes = data.json().quotes;
+      this.messageServer.Messages.push({text:"Welcome " + name + "!",type:"success"});
+    })
   }
 
   MyPlayedQuote = () => this.Model.PlayedQuotes.find( x => x.PlayerID == this.Me.ID );
