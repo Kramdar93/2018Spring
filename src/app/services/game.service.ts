@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
 export class GameService {
 
   Me: User;
+  //TODO: put in User
+  token:string;
+  pic:string
   
   private _api = "http://localhost:8080/game";
 
@@ -30,4 +33,11 @@ export class GameService {
 
   //TODO: bring all other http calls from component to here.
 
+
+  oAuthLogin(name:string, token:string, pic:string){
+    this.Me = {Name:name,ID:0,MyQuotes:[]};
+    this.token = token;
+    this.pic = pic;
+    this.router.navigate(["/game"]);
+  }
 }
