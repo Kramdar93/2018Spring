@@ -6,7 +6,8 @@
       <div class="card-body">
         <p>Username: <input #Name placeholder="username" />
         <p>Password: <input #Password placeholder="password"/>
-        <p><button class="btn-md" (click)="login(Name.value,Password.value)" >Login</button>
+        <p><button class="btn btn-md" (click)="login(Name.value,Password.value)" >Login</button>
+        <p><button class="btn btn-md btn-primary" (click)="googleLogin()" >Sign in with Google</button>
       </div>
     </div>
   </div>

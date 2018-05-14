@@ -12,6 +12,18 @@ declare var googleyolo:any;
 export class LoginComponent implements OnInit {
 
   constructor(private game:GameService) {
+    
+  }
+
+  ngOnInit() {
+  }
+
+
+  login(name:string,pword:string){
+    this.game.login(name,pword)
+  }
+
+  googleLogin(){
     /*window.onGoogleYoloLoad = (googleyolo:any) => {
       // The 'googleyolo' object is ready for use.
     };*/
@@ -28,15 +40,7 @@ export class LoginComponent implements OnInit {
       ]
     }).then((credentials:any)=>{
       //console.log(credentials);
-      game.oAuthLogin(credentials.displayName,credentials.idToken,credentials.profilePicture);
+      this.game.oAuthLogin(credentials.displayName,credentials.idToken,credentials.profilePicture);
     });
-  }
-
-  ngOnInit() {
-  }
-
-
-  login(name:string,pword:string){
-    this.game.login(name,pword)
   }
 }
