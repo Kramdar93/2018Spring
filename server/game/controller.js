@@ -14,7 +14,7 @@ module.exports = app
     .post('/picture', (req, res) => res.send( game.FlipPicture() ))
     .post('/quotes', (req, res) => {
         console.log(req.body);
-        game.SubmitQuote(req.body.Text, req.body.PlayerId);
+        game.SubmitQuote(req.body.Text, req.body.PlayerID);
         res.send( { success: true } );
     })
     .post('/choose', (req,res)=> { 

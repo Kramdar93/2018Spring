@@ -21,13 +21,13 @@ export class GameService {
   login(name:string,pword:string){
     if(pword=="123"){
       //log user in
-      /*this.http.get(this._api + "/quotes", { params : { PlayerID: name } })
+      this.http.get(this._api + "/quotes", { params : { PlayerID: name } })
       .subscribe(data=> {
         this.Me = { Name: name, ID:data.json().ID, MyQuotes: data.json().quotes };
         this.messageServer.Messages.push({text:"Welcome " + name + "!",type:"success"});
-      })*/
-      this.Me = {Name:name,ID:0,MyQuotes:[]};
-      this.router.navigate(["/game"]);
+        this.router.navigate(["/game"]);
+      })
+      //this.Me = {Name:name,ID:0,MyQuotes:[]};
     }
   }
 
@@ -35,9 +35,15 @@ export class GameService {
 
 
   oAuthLogin(name:string, token:string, pic:string){
-    this.Me = {Name:name,ID:0,MyQuotes:[]};
-    this.token = token;
-    this.pic = pic;
-    this.router.navigate(["/game"]);
+    this.http.get(this._api + "/quotes", { params : { PlayerID: name } })
+      .subscribe(data=> {
+        this.Me = { Name: name, ID:data.json().ID, MyQuotes: data.json().quotes };
+        this.messageServer.Messages.push({text:"Welcome " + name + "!",type:"success"});
+        this.token = token;
+        this.pic = pic;
+        this.router.navigate(["/game"]);
+      })
+    //this.Me = {Name:name,ID:0,MyQuotes:[]};
+    //this.router.navigate(["/game"]);
   }
 }
